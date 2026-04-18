@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, ShoppingCart, User, X } from 'lucide-react';
 import { useI18n } from '../i18n-context';
+import BrandMark from './shared/BrandMark';
 
 interface SiteLayoutProps {
   children: ReactNode;
@@ -28,16 +29,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between lg:h-20">
             <Link to="/" className="group flex items-center gap-3">
-              <span className="relative h-8 w-8 transition-transform group-hover:scale-110">
-                <img
-                  src="/tree-icon.png"
-                  alt="Bifrost tree icon"
-                  className="h-full w-full object-contain"
-                />
-              </span>
-              <span className="logo-wordmark text-[2rem] leading-none transition-transform group-hover:scale-105">
-                BIFRÖST
-              </span>
+              <BrandMark size="lg" interactive className="gap-3" />
             </Link>
 
             <div className="hidden md:flex items-center gap-8">
@@ -110,16 +102,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 mb-8">
             <div className="md:col-span-1">
               <Link to="/" className="mb-4 flex items-center gap-3">
-                <span className="h-7 w-7">
-                  <img
-                    src="/tree-icon.png"
-                    alt="Bifrost tree icon"
-                    className="h-full w-full object-contain"
-                  />
-                </span>
-                <span className="logo-wordmark text-[1.8rem] leading-none">
-                  BIFRÖST
-                </span>
+                <BrandMark size="md" className="gap-3" />
               </Link>
               <p className="text-sm text-muted-foreground">
                 {t('footer.description')}

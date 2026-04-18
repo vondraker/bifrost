@@ -2,6 +2,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import SiteLayout from '../components/SiteLayout';
 import { useI18n } from '../i18n-context';
+import InlineAlert from '../components/ui/InlineAlert';
+import PrimaryButton from '../components/ui/PrimaryButton';
+import SurfaceCard from '../components/ui/SurfaceCard';
+import TextField from '../components/ui/TextField';
 
 const passwordRules = [
   { id: 'length', labelKey: 'register.req.length', test: (value: string) => value.length >= 8 },
@@ -68,29 +72,29 @@ export default function RegisterPage() {
         </div>
 
         <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-16 lg:px-24 py-12">
-          <section className="w-full max-w-xl mx-auto rounded-2xl border border-border bg-card/60 p-8">
+          <SurfaceCard as="section" className="w-full max-w-xl mx-auto bg-card/60 p-8">
             <h1 className="mb-2 font-[var(--font-orbitron)] text-3xl font-bold">{t('register.title')}</h1>
             <p className="mb-6 text-muted-foreground">{t('register.subtitle')}</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <InputField
+              <TextField
                 label={t('register.username')}
                 value={formData.username}
                 onChange={(value) => setFormData((previous) => ({ ...previous, username: value }))}
               />
-              <InputField
+              <TextField
                 label={t('register.email')}
                 type="email"
                 value={formData.email}
                 onChange={(value) => setFormData((previous) => ({ ...previous, email: value }))}
               />
-              <InputField
+              <TextField
                 label={t('register.password')}
                 type="password"
                 value={formData.password}
                 onChange={(value) => setFormData((previous) => ({ ...previous, password: value }))}
               />
-              <InputField
+              <TextField
                 label={t('register.confirmPassword')}
                 type="password"
                 value={formData.confirmPassword}
@@ -123,16 +127,16 @@ export default function RegisterPage() {
                 {t('register.terms')}
               </label>
 
-              <button
+              <PrimaryButton
                 type="submit"
                 disabled={isLoading}
-                className="h-11 w-full rounded-lg bg-primary font-semibold text-primary-foreground disabled:opacity-60"
+                className="w-full"
               >
                 {isLoading ? t('register.creating') : t('register.create')}
-              </button>
+              </PrimaryButton>
             </form>
 
-            {error && <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">{error}</p>}
+            {error && <InlineAlert className="mt-4">{error}</InlineAlert>}
 
             <p className="mt-5 text-sm text-muted-foreground">
               {t('register.already')}{' '}
@@ -140,33 +144,9 @@ export default function RegisterPage() {
                 {t('register.signIn')}
               </Link>
             </p>
-          </section>
+          </SurfaceCard>
         </div>
       </main>
     </SiteLayout>
-  );
-}
-
-function InputField({
-  label,
-  value,
-  onChange,
-  type = 'text',
-}: {
-  label: string;
-  value: string;
-  onChange: (next: string) => void;
-  type?: string;
-}) {
-  return (
-    <label className="block text-sm">
-      <span className="mb-1 block text-muted-foreground">{label}</span>
-      <input
-        type={type}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="h-11 w-full rounded-lg border border-border bg-background px-3 outline-none ring-primary/40 focus:ring-2"
-      />
-    </label>
   );
 }

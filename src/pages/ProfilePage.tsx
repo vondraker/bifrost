@@ -3,6 +3,10 @@ import { Navigate } from 'react-router-dom';
 import SiteLayout from '../components/SiteLayout';
 import { fetchMinecraftProfile, fetchSessionUser, getErrorMessage, type MinecraftProfile, type User } from '../lib/api';
 import { useI18n } from '../i18n-context';
+import InlineAlert from '../components/ui/InlineAlert';
+import PrimaryButton from '../components/ui/PrimaryButton';
+import SurfaceCard from '../components/ui/SurfaceCard';
+import TextField from '../components/ui/TextField';
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -87,41 +91,40 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        <section className="mb-6 rounded-2xl border border-border bg-card p-6">
+        <SurfaceCard as="section" className="mb-6 p-6">
           <div className="flex items-center gap-4">
             <div>
               <h2 className="font-[var(--font-orbitron)] text-xl font-semibold">{t('profile.welcome')}</h2>
               <p className="text-sm text-muted-foreground">{t('profile.linkAccount')}</p>
             </div>
           </div>
-        </section>
+        </SurfaceCard>
 
         {!minecraftProfile ? (
-          <section className="rounded-2xl border border-border bg-card p-6">
+          <SurfaceCard as="section" className="p-6">
             <h2 className="font-[var(--font-orbitron)] mb-2 text-xl font-semibold">{t('profile.linkUsername')}</h2>
             <p className="mb-4 text-sm text-muted-foreground">
               {t('profile.fetchDesc')}
             </p>
 
             <form className="flex flex-col gap-3 sm:flex-row" onSubmit={handleMinecraftSubmit}>
-              <input
-                className="h-11 flex-1 rounded-lg border border-border bg-background px-3 text-foreground outline-none ring-primary/40 focus:ring-2"
+              <TextField
+                className="flex-1"
                 value={minecraftUsername}
-                onChange={(event) => setMinecraftUsername(event.target.value)}
+                onChange={setMinecraftUsername}
                 placeholder={t('profile.usernamePlaceholder')}
                 required
               />
-              <button
+              <PrimaryButton
                 type="submit"
                 disabled={loadingMinecraft}
-                className="h-11 rounded-lg bg-primary px-6 font-semibold text-primary-foreground disabled:opacity-60"
               >
                 {loadingMinecraft ? t('profile.loadingButton') : t('profile.fetchButton')}
-              </button>
+              </PrimaryButton>
             </form>
-          </section>
+          </SurfaceCard>
         ) : (
-          <section className="rounded-2xl border border-border bg-card p-6">
+          <SurfaceCard as="section" className="p-6">
             <h2 className="font-[var(--font-orbitron)] mb-4 text-xl font-semibold">{t('profile.minecraftProfile')}</h2>
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <img
@@ -141,10 +144,10 @@ export default function ProfilePage() {
             >
               {t('profile.changeUsername')}
             </button>
-          </section>
+          </SurfaceCard>
         )}
 
-        {error && <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">{error}</p>}
+        {error && <InlineAlert className="mt-4">{error}</InlineAlert>}
       </main>
     </SiteLayout>
   );

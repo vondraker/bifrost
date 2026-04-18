@@ -3,6 +3,8 @@ import { GoogleLogin, GoogleOAuthProvider, type CredentialResponse } from '@reac
 import { Navigate, useNavigate } from 'react-router-dom';
 import { fetchSessionUser, getErrorMessage, loginWithGoogleCredential, type User } from '../lib/api';
 import { useI18n } from '../i18n-context';
+import InlineAlert from '../components/ui/InlineAlert';
+import BrandMark from '../components/shared/BrandMark';
 
 export default function LoginPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -73,14 +75,7 @@ export default function LoginPage() {
       <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8">
         <div className="w-full max-w-md rounded-2xl border border-white/15 bg-black/65 p-6 shadow-2xl backdrop-blur-md sm:p-8">
           <div className="mb-6 flex items-center justify-center gap-3">
-            <span className="h-8 w-8">
-              <img
-                src="/tree-icon.png"
-                alt="Bifrost tree icon"
-                className="h-full w-full object-contain"
-              />
-            </span>
-            <span className="logo-wordmark text-[1.6rem] leading-none">BIFRÖST</span>
+            <BrandMark size="sm" className="gap-3" />
           </div>
 
           <h1 className="font-[var(--font-orbitron)] mb-2 text-center text-2xl font-bold">{t('login.welcomeBack')}</h1>
@@ -131,12 +126,10 @@ export default function LoginPage() {
               <p className="text-center text-xs text-muted-foreground">{t('login.useGooglePrompt')}</p>
             </div>
           ) : (
-            <p className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-300">
-              {t('login.googleNotConfigured')}
-            </p>
+            <InlineAlert>{t('login.googleNotConfigured')}</InlineAlert>
           )}
 
-          {error && <p className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-300">{error}</p>}
+          {error && <InlineAlert className="mt-4">{error}</InlineAlert>}
 
           <button
             type="button"
