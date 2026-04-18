@@ -3,6 +3,7 @@ import { Crown, Gem, Search, Sparkles, Star } from 'lucide-react';
 import SiteLayout from '../components/SiteLayout';
 import { useI18n } from '../i18n-context';
 import PrimaryButton from '../components/ui/PrimaryButton';
+import SectionBadge from '../components/ui/SectionBadge';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import TextField from '../components/ui/TextField';
 
@@ -61,10 +62,10 @@ export default function ShopPage() {
     <SiteLayout>
       <main className="mx-auto max-w-6xl px-4 py-10">
         <section className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-4">
+          <SectionBadge className="mb-4">
             <Search className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">{t('shop.officialStore')}</span>
-          </div>
+          </SectionBadge>
           <h1 className="font-[var(--font-orbitron)] text-4xl sm:text-5xl font-bold">{t('shop.chooseRank')}</h1>
           <p className="mt-3 text-lg text-muted-foreground">
             {t('shop.subtitle')}

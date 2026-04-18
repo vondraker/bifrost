@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Crown, Gem, Shield, Sparkles, Sword, Users, Zap } from 'lucide-react';
 import SiteLayout from '../components/SiteLayout';
+import SectionBadge from '../components/ui/SectionBadge';
 import { useI18n } from '../i18n-context';
 
 const SERVER_HOST = 'bifrost.minecraft.best';
@@ -75,10 +76,10 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 right-1/4 h-40 w-40 rounded-full bg-accent/20 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
 
           <div className="relative z-10 mx-auto max-w-5xl px-4 pt-20 text-center">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm text-primary">
-              <Sparkles className="h-4 w-4" />
-              {t('home.seasonLive')}
-            </div>
+            <SectionBadge className="mb-8">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm text-primary">{t('home.seasonLive')}</span>
+            </SectionBadge>
 
             <h1 className="font-[var(--font-orbitron)] mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
               <span>{t('home.welcomeTo')}</span>
@@ -132,9 +133,9 @@ export default function HomePage() {
         <section className="py-24 px-4" id="features">
           <div className="mx-auto max-w-6xl">
             <div className="mb-16 text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
+              <SectionBadge className="mb-4">
                 <span className="text-sm font-medium text-primary">{t('home.whyChoose')}</span>
-              </div>
+              </SectionBadge>
               <h2 className="font-[var(--font-orbitron)] mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl">{t('home.ultimateTitle')}</h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 {t('home.ultimateDesc')}
@@ -151,10 +152,10 @@ export default function HomePage() {
         <section id="ranks" className="bg-card/50 py-24 px-4">
           <div className="mx-auto max-w-7xl">
             <div className="mb-16 text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
+              <SectionBadge className="mb-4">
                 <Crown className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">{t('home.premiumRanks')}</span>
-              </div>
+              </SectionBadge>
               <h2 className="font-[var(--font-orbitron)] mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl">{t('home.elevate')}</h2>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
